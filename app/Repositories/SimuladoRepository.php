@@ -54,7 +54,8 @@ final class SimuladoRepository extends AbstractRepository implements RepositoryI
     */
     public function buscarSimulado(Request $request, int $limit, int $offset)
     {
-        $order     = (!empty($request->order) ? $request->order : self::DEFAULT_ORDER);
-        return $this->findBy($request->all(), $order, $limit, $offset)->toArray();
+        $get_all   = $request->all();
+        $order     = (isset($get_all['order']) ? [['order'] => $get_all['type_order']] : self::DEFAULT_ORDER);
+        return $this->findBy($get_all, $order, $limit, $offset)->toArray();
     }
 }
