@@ -10,6 +10,7 @@
 * Execute no terminal / Run at your terminal: `php artisan key:generate` / Copy the key
 * Execute no terminal / Run at your terminal: `php artisan migrate`
 * Update your .env file with your key generated
+* Execute no terminal / Run at your terminal: `composer install`
 
 ### Teste sua aplicação
 * Execute no terminal / Run at your terminal: 
