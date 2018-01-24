@@ -12,7 +12,7 @@ use App\Models\Simulado;
 */
 final class SimuladoRepository extends AbstractRepository implements RepositoryInterface
 {
-    const DEFAULT_ORDER = ['banca'=>'asc'];
+    const DEFAULT_ORDER = [['banca'=>'asc']];
 
 	public function __construct(Simulado $model)
 	{

@@ -63,29 +63,24 @@ abstract class AbstractRepository
 
     public function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null)
     {
-        $model = clone $this->model;
+        $modelClone = clone $this->model;
 
         if (!empty($criteria) && count($criteria) >= 1) {
             foreach ($criteria as $c) {
-                $model->where($c[0], $c[1], $c[2]);
+                $modelClone = $modelClone->where($c[0], $c[1], $c[2]);
             }
         }
-
         if (!empty($orderBy) && count($orderBy) >= 1) {
-            foreach ($orderBy as $order) {
-                $model->orderBy($order[0], $order[1]);
+            foreach ($orderBy as $key => $value) {
+                $modelClone = $modelClone->orderBy(key($value), $value[key($value)]);
             }
         }
 
-        if (!empty($limit)) {
-            $model->take($limit);
+        if ($offset !== null && $offset >= 0 && $limit !== null && $limit >= 0) {
+            $modelClone = $modelClone->skip($offset*$limit)->take($limit);
         }
 
-        if (!empty($offset)) {
-            $model->skip($offset);
-        }
-
-        return $model->get();
+        return $modelClone->get();
     }
 
     public function findOneBy(array $criteria)
