@@ -42,7 +42,7 @@ final class SimuladoRepository extends AbstractRepository implements RepositoryI
     {
         self::validateData($request, $this->rules, $this->messages);
         $operation = $this->update($request, $code);
-        return $this->model->{$primaryKey};
+        return $this->model->{$this->model->primaryKey};
     }
 
     /**
